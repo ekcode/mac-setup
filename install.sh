@@ -68,9 +68,13 @@ fi
 echo "Task: git config globally"
 git config --global user.name "Ickhyun Kwon"
 git config --global user.email "ekcode@icloud.com"
+git config --global branch.master.remote origin
+git config --global branch.master.merge refs/heads/master
 git config --global push.default simple
 git config --global core.excludesfile ~/.gitignore
-echo .DS_Store >> ~/.gitignore
+if ! grep -q "\.DS_Store" ~/.gitignore; then
+    echo .DS_Store >> ~/.gitignore
+fi
 
 if [ ! -d ~/github ]; then
     echo "Task: create  ~/github directory"
