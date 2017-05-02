@@ -108,10 +108,8 @@ fi
 
 
 ## install oh-my-zsh
-if ! command -v zsh > /dev/null; then
-    echo "Task: install zsh. input Ctrl+D after installing"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/oh-my-zsh/master/tools/install.sh)"
-fi
+echo "Task: install zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/oh-my-zsh/master/tools/install.sh)"
 
 
 ## scm_breeze
@@ -121,7 +119,7 @@ if [ ! -d ~/.scm_breeze ]; then
     ~/.scm_breeze/install.sh
 fi
 
-if ! grep -q "plugins=(git)" ~/.zshrc; then
+if ! grep -q "plugins=\(git\)" ~/.zshrc; then
     echo "Task: settings for zsh plugins"
     sed -i '' -e 's/plugins=(git)/plugins=(git autojump)/' ~/.zshrc
 fi
