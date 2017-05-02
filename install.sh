@@ -76,7 +76,7 @@ fi
 
 ## clone all my github repos
 echo "clone all my github repositories"
-USER=ekcode; cd ~/github && curl -s "https://api.github.com/users/$USER/repos?per_page=1000" | grep -o 'git@[^"]*' | xargs -L1 git clone'"]'
+USER=ekcode; cd ~/github && curl -s "https://api.github.com/users/$USER/repos?per_page=1000" | grep -o 'git@[^"]*' | xargs -L1 git clone
 cd -
 
 
@@ -104,7 +104,7 @@ fi
 
 if ! grep -q "plugins=(git)" ~/.zshrc; then
     echo "setup zsh plugins"
-    sed -i 's/plugins=(git)/plugins=(git autojump)/' ~/.zshrc
+    sed -i '' -e 's/plugins=(git)/plugins=(git autojump)/' ~/.zshrc
 fi
 
 ## hosts
@@ -122,17 +122,17 @@ else
 fi
 
 
-## java lib/securigy
+## java lib/security
 SECURITY_DIR="`/usr/libexec/java_home`/jre/lib/security"
 echo "install lib/security files"
 if [ -z `basename $0` ]; then
     echo " - copying java security library files is skipped. clone this repository and run install.sh on local"
 else
     if [ ! -f $SECURITY_DIR/US_export_policy.jar.bak ]; then
-        cp $SECURITY_DIR/US_export_policy.jar $SECURITY_DIR/US_export_policy.jar.bak
-        cp $SECURITY_DIR/local_policy.jar $SECURITY_DIR/local_policy.jar.bak
-        cp "`dirname $0`/java-security-lib/US_export_policy.jar" $SECURITY_DIR
-        cp "`dirname $0`/java-security-lib/local_policy.jar" $SECURITY_DIR
+        sudo cp $SECURITY_DIR/US_export_policy.jar $SECURITY_DIR/US_export_policy.jar.bak
+        sudo cp $SECURITY_DIR/local_policy.jar $SECURITY_DIR/local_policy.jar.bak
+        sudo cp "`dirname $0`/java-security-lib/US_export_policy.jar" $SECURITY_DIR
+        sudo cp "`dirname $0`/java-security-lib/local_policy.jar" $SECURITY_DIR
         echo " - installed"
     else
         echo " - already installed"
