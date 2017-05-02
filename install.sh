@@ -55,7 +55,7 @@ echo "setup fzf"
 /usr/local/opt/fzf/install --all
 set rtp+=\/usr\/local\/opt\/fzf
 if ! grep -q "set rtp+=\/usr\/local\/opt\/fzf" ~/.vimrc; then
-    printf "\nset rtp+=\/usr\/local\/opt\/fzf" >> ~/.vimrc
+    printf "\nset rtp+=/usr/local/opt/fzf" >> ~/.vimrc
 else
     echo " - fzf is already installed"
 fi
