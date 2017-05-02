@@ -1,8 +1,10 @@
 ## Homebrew
 if ! command -v brew > /dev/null; then
+    echo "install homebrew"
     xcode-select --install
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
+    echo "homebrew already installed"
     brew update
     brew upgrade
 fi
@@ -46,6 +48,7 @@ brew install git \
     yarn \
     heroku
 
+echo "set git config globally"
 git config --global user.name "Ickhyun Kwon"
 git config --global user.email "ekcode@icloud.com"
 git config --global core.excludesfile ~/.gitignore
@@ -65,11 +68,14 @@ if [ ! -f ~/.ssh/id_rsa ]; then
     echo "create new ssh key and add to github.com"
     ssh-keygen -f id_rsa -t rsa -N '' -C 'ekcode@icloud.com'
     curl -u "ekcode" --data "{\"title\":\"\",\"key\":\"`cat ~/.ssh/id_rsa.pub`\"}" https://api.github.com/user/keys
+else
+    echo "ssh key exists already"
 fi
 
 
 
 ## clone all my github repos
+echo "clone all my github repositories"
 USER=ekcode; cd ~/github && curl -s "https://api.github.com/users/$USER/repos?per_page=1000" | grep -o 'git@[^"]*' | xargs -L1 git clone'"]'
 cd -
 
@@ -85,7 +91,7 @@ fi
 ## install oh-my-zsh
 if ! command -v zsh > /dev/null; then
     echo "install zsh. input Ctrl+D after installing"
-    bash --rcfile zsh_install.sh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/oh-my-zsh/master/tools/install.sh)"
 fi
 
 
@@ -105,21 +111,30 @@ fi
 host1="127.0.0.1	local.publisher.daumtools.com"
 host2="127.0.0.1	local.frontview.publisher.daumtools.com"
 host3="127.0.0.1	local.publisher.biz.daum.net"
+echo "modify hosts"
 if ! grep -q "$host1" /etc/hosts; then
-    echo "modify hosts"
     printf "\n$host1" >> /etc/hosts
     printf "\n$host2" >> /etc/hosts
     printf "\n$host3" >> /etc/hosts
+    echo " - /etc/hosts modified"
+else
+    echo " - already modified. skipped"
 fi
 
 
 ## java lib/securigy
 SECURITY_DIR="`/usr/libexec/java_home`/jre/lib/security"
-if [ ! -f $SECURITY_DIR/US_export_policy.jar.bak ]; then
-    cp $SECURITY_DIR/US_export_policy.jar $SECURITY_DIR/US_export_policy.jar.bak
-    cp $SECURITY_DIR/local_policy.jar $SECURITY_DIR/local_policy.jar.bak
-    cp "`dirname $0`/java-security-lib/US_export_policy.jar" $SECURITY_DIR
-    cp "`dirname $0`/java-security-lib/local_policy.jar" $SECURITY_DIR
+echo "install lib/security files"
+if [ -z `basename $0` ]; then
+    echo " - copying java security library files is skipped. clone this repository and run install.sh on local"
+else
+    if [ ! -f $SECURITY_DIR/US_export_policy.jar.bak ]; then
+        cp $SECURITY_DIR/US_export_policy.jar $SECURITY_DIR/US_export_policy.jar.bak
+        cp $SECURITY_DIR/local_policy.jar $SECURITY_DIR/local_policy.jar.bak
+        cp "`dirname $0`/java-security-lib/US_export_policy.jar" $SECURITY_DIR
+        cp "`dirname $0`/java-security-lib/local_policy.jar" $SECURITY_DIR
+        echo " - installed"
+    else
+        echo " - already installed"
+    fi
 fi
-
-
