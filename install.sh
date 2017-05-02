@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## Homebrew
 if ! command -v brew > /dev/null; then
     echo "install homebrew"
@@ -48,6 +50,17 @@ brew install git \
     yarn \
     heroku
 
+## fzf
+echo "setup fzf"
+/usr/local/opt/fzf/install --all
+set rtp+=\/usr\/local\/opt\/fzf
+if ! grep -q "set rtp+=\/usr\/local\/opt\/fzf" ~/.vimrc; then
+    printf "\nset rtp+=\/usr\/local\/opt\/fzf" >> ~/.vimrc
+else
+    echo " - fzf is already installed"
+fi
+
+## git config
 echo "set git config globally"
 git config --global user.name "Ickhyun Kwon"
 git config --global user.email "ekcode@icloud.com"
