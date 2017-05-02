@@ -6,6 +6,7 @@ else
     brew update
     brew upgrade
 fi
+
 brew doctor
 
 
@@ -57,11 +58,30 @@ if [ ! -d ~/works ]; then
     mkdir ~/works
 fi
 
+## create id_rsa key
+if [ ! -f ~/.ssh/id_rsa ]; then
+    ssh-keygen -f id_rsa -t rsa -N '' -C 'ekcode@icloud.com'
+fi
+
+## add key to github
+curl -u "ekcode" --data "{\"title\":\"\",\"key\":\"`cat ~/.ssh/id_rsa.pub`\"}" https://api.github.com/user/keys
+
+
+## clone all my github repos
+USER=ekcode; cd ~/github && curl -s "https://api.github.com/users/$USER/repos?per_page=1000" | grep -o 'git@[^"]*' | xargs -L1 git clone'"]'
+cd -
+
 
 ## vim setup
 if [ ! -d ~/.vim_runtime ]; then
     git clone https://github.com/ekcode/vimrc.git ~/.vim_runtime
     sh ~/.vim_runtime/install_awesome_vimrc.sh
+fi
+
+
+## install oh-my-zsh
+if ! command -v zsh > /dev/null; then
+    bash --rcfile zsh_install.sh
 fi
 
 
@@ -72,8 +92,21 @@ if [ ! -d ~/.scm_breeze ]; then
 fi
 
 
-## zsh
-
-if ! command -v zsh > /dev/null; then
-    bash --rcfile zsh_install.sh
+## hosts
+host1="127.0.0.1	local.publisher.daumtools.com"
+host2="127.0.0.1	local.frontview.publisher.daumtools.com"
+host3="127.0.0.1	local.publisher.biz.daum.net"
+if ! grep -q "$host1" /etc/hosts; then
+    printf "\n$host1" >> /etc/hosts
+    printf "\n$host2" >> /etc/hosts
+    printf "\n$host3" >> /etc/hosts
 fi
+
+
+## java lib/securigy
+SECURITY_DIR="`/usr/libexec/java_home`/jre/lib/security"
+cp $SECURITY_DIR/US_export_policy.jar $SECURITY_DIR/US_export_policy.jar.bak
+cp $SECURITY_DIR/local_policy.jar $SECURITY_DIR/local_policy.jar.bak
+cp "`dirname $0`/java-security-lib/US_export_policy.jar" $SECURITY_DIR
+cp "`dirname $0`/java-security-lib/local_policy.jar" $SECURITY_DIR
+
