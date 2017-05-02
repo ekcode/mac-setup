@@ -64,6 +64,7 @@ fi
 echo "set git config globally"
 git config --global user.name "Ickhyun Kwon"
 git config --global user.email "ekcode@icloud.com"
+git config --global push.default simple
 git config --global core.excludesfile ~/.gitignore
 echo .DS_Store >> ~/.gitignore
 
