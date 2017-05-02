@@ -52,7 +52,8 @@ brew install git \
     tree \
     mongodb \
     yarn \
-    heroku
+    heroku \
+    ack
 
 ## fzf
 echo "Task: configure fzf"
