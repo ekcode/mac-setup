@@ -140,16 +140,12 @@ fi
 ## java lib/security
 SECURITY_DIR="`/usr/libexec/java_home`/jre/lib/security"
 echo "install lib/security files"
-if [ -z `basename $0` ]; then
-    echo " - copying java security library files is skipped. clone this repository and run install.sh on local"
+if [ ! -f $SECURITY_DIR/US_export_policy.jar.bak ]; then
+    sudo cp $SECURITY_DIR/US_export_policy.jar $SECURITY_DIR/US_export_policy.jar.bak
+    sudo cp $SECURITY_DIR/local_policy.jar $SECURITY_DIR/local_policy.jar.bak
+    sudo curl -L https://raw.githubusercontent.com/ekcode/mac-setup/master/java-security-lib/local_policy.jar -o $SECURITY_DIR/local_policy.jar
+    sudo curl -L https://raw.githubusercontent.com/ekcode/mac-setup/master/java-security-lib/US_export_policy.jar -o $SECURITY_DIR/US_export_policy.jar
+    echo " - installed"
 else
-    if [ ! -f $SECURITY_DIR/US_export_policy.jar.bak ]; then
-        sudo cp $SECURITY_DIR/US_export_policy.jar $SECURITY_DIR/US_export_policy.jar.bak
-        sudo cp $SECURITY_DIR/local_policy.jar $SECURITY_DIR/local_policy.jar.bak
-        sudo cp "`dirname $0`/java-security-lib/US_export_policy.jar" $SECURITY_DIR
-        sudo cp "`dirname $0`/java-security-lib/local_policy.jar" $SECURITY_DIR
-        echo " - installed"
-    else
-        echo " - already installed"
-    fi
+    echo " - already installed"
 fi
