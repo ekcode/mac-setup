@@ -4,7 +4,7 @@
 if ! command -v brew > /dev/null; then
     echo "install homebrew"
     xcode-select --install
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
     echo "homebrew already installed"
     brew update
@@ -15,39 +15,39 @@ brew doctor
 
 
 brew cask install java \
-	google-chrome \
-	intellij-idea \
-	sourcetree \
-	iterm2 \
-	enpass \
-	atom \
-	dropbox \
-	google-photos-backup \
-	google-trends
+    google-chrome \
+    intellij-idea \
+    sourcetree \
+    iterm2 \
+    enpass \
+    atom \
+    dropbox \
+    google-photos-backup \
+    google-trends
 
 
 brew install git \
-	git-flow \
-	ansible \
-	grip \
+    git-flow \
+    ansible \
+    grip \
     fzf \
     autojump \
-	httpstat \
-	leiningen \
-	less \
-	maven \
-	node \
-	openssl \
-	pyenv \
-	pyenv-virtualenv \
+    httpstat \
+    leiningen \
+    less \
+    maven \
+    node \
+    openssl \
+    pyenv \
+    pyenv-virtualenv \
     autoenv \
-	python \
-	python3 \
-	ripgrep \
-	sbt \
-	tig \
-	tree \
-	mongodb \
+    python \
+    python3 \
+    ripgrep \
+    sbt \
+    tig \
+    tree \
+    mongodb \
     yarn \
     heroku
 
@@ -123,9 +123,9 @@ if ! grep -q "plugins=(git)" ~/.zshrc; then
 fi
 
 ## hosts
-host1="127.0.0.1	local.publisher.daumtools.com"
-host2="127.0.0.1	local.frontview.publisher.daumtools.com"
-host3="127.0.0.1	local.publisher.biz.daum.net"
+host1="127.0.0.1    local.publisher.daumtools.com"
+host2="127.0.0.1    local.frontview.publisher.daumtools.com"
+host3="127.0.0.1    local.publisher.biz.daum.net"
 echo "modify hosts"
 if ! grep -q "$host1" /etc/hosts; then
     printf "\n$host1" >> /etc/hosts
