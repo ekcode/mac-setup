@@ -124,9 +124,16 @@ if [ ! -d ~/.scm_breeze ]; then
     ~/.scm_breeze/install.sh
 fi
 
+## zsh plugins
 if ! grep -q "plugins=\(git\)" ~/.zshrc; then
     echo "Task: settings for zsh plugins"
     sed -i '' -e 's/plugins=(git)/plugins=(git autojump)/' ~/.zshrc
+fi
+
+## LC_ALL
+if ! grep -q "export LC_ALL=\"ko_KR.UTF-8\"" ~/.zshrc; then
+    echo "Task: export LC_ALL"
+    printf "export LC_ALL=\"ko_KR.UTF-8\"" >> ~/.zshrc
 fi
 
 ## hosts
