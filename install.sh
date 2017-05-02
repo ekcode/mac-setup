@@ -60,11 +60,11 @@ fi
 
 ## create id_rsa key
 if [ ! -f ~/.ssh/id_rsa ]; then
+    echo "create new ssh key and add to github.com"
     ssh-keygen -f id_rsa -t rsa -N '' -C 'ekcode@icloud.com'
+    curl -u "ekcode" --data "{\"title\":\"\",\"key\":\"`cat ~/.ssh/id_rsa.pub`\"}" https://api.github.com/user/keys
 fi
 
-## add key to github
-curl -u "ekcode" --data "{\"title\":\"\",\"key\":\"`cat ~/.ssh/id_rsa.pub`\"}" https://api.github.com/user/keys
 
 
 ## clone all my github repos
@@ -74,6 +74,7 @@ cd -
 
 ## vim setup
 if [ ! -d ~/.vim_runtime ]; then
+    echo "setup vim"
     git clone https://github.com/ekcode/vimrc.git ~/.vim_runtime
     sh ~/.vim_runtime/install_awesome_vimrc.sh
 fi
@@ -81,22 +82,29 @@ fi
 
 ## install oh-my-zsh
 if ! command -v zsh > /dev/null; then
+    echo "install zsh. input Ctrl+D after installing"
     bash --rcfile zsh_install.sh
 fi
 
 
 ## scm_breeze
 if [ ! -d ~/.scm_breeze ]; then
+    echo "install scm_breeze"
     git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
     ~/.scm_breeze/install.sh
 fi
 
+if ! grep -q "plugins=(git)" ~/.zshrc; then
+    echo "setup zsh plugins"
+    sed -i 's/plugins=(git)/plugins=(git autojump)/' ~/.zshrc
+fi
 
 ## hosts
 host1="127.0.0.1	local.publisher.daumtools.com"
 host2="127.0.0.1	local.frontview.publisher.daumtools.com"
 host3="127.0.0.1	local.publisher.biz.daum.net"
 if ! grep -q "$host1" /etc/hosts; then
+    echo "modify hosts"
     printf "\n$host1" >> /etc/hosts
     printf "\n$host2" >> /etc/hosts
     printf "\n$host3" >> /etc/hosts
@@ -105,8 +113,11 @@ fi
 
 ## java lib/securigy
 SECURITY_DIR="`/usr/libexec/java_home`/jre/lib/security"
-cp $SECURITY_DIR/US_export_policy.jar $SECURITY_DIR/US_export_policy.jar.bak
-cp $SECURITY_DIR/local_policy.jar $SECURITY_DIR/local_policy.jar.bak
-cp "`dirname $0`/java-security-lib/US_export_policy.jar" $SECURITY_DIR
-cp "`dirname $0`/java-security-lib/local_policy.jar" $SECURITY_DIR
+if [ ! -f $SECURITY_DIR/US_export_policy.jar.bak ]; then
+    cp $SECURITY_DIR/US_export_policy.jar $SECURITY_DIR/US_export_policy.jar.bak
+    cp $SECURITY_DIR/local_policy.jar $SECURITY_DIR/local_policy.jar.bak
+    cp "`dirname $0`/java-security-lib/US_export_policy.jar" $SECURITY_DIR
+    cp "`dirname $0`/java-security-lib/local_policy.jar" $SECURITY_DIR
+fi
+
 
