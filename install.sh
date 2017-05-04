@@ -1,6 +1,8 @@
 #!/bin/bash
 
-## Homebrew
+################################################################################
+##  Homebrew                                                                  ##
+################################################################################
 echo "Task: homebrew"
 if ! command -v brew > /dev/null; then
     echo " >> run xcode-select"
@@ -15,6 +17,9 @@ fi
 
 brew doctor
 
+################################################################################
+##  Install apps by brew cask                                                 ##
+################################################################################
 echo "Task: install apps by brew cask"
 brew cask install java \
     google-chrome \
@@ -28,6 +33,9 @@ brew cask install java \
     google-trends
 
 
+################################################################################
+##  Install packages using brew                                               ##
+################################################################################
 echo "Task: install packages by brew"
 brew install git \
     git-flow \
@@ -55,7 +63,9 @@ brew install git \
     heroku \
     ack
 
-## fzf
+################################################################################
+##  fzf                                                                       ##
+################################################################################
 echo "Task: configure fzf"
 /usr/local/opt/fzf/install --all
 if ! grep -q "set rtp+=\/usr\/local\/opt\/fzf" ~/.vimrc; then
@@ -64,7 +74,9 @@ else
     echo " - fzf is already configured"
 fi
 
-## git config
+################################################################################
+##  Git configuration                                                         ##
+################################################################################
 echo "Task: git config globally"
 git config --global user.name "Ickhyun Kwon"
 git config --global user.email "ekcode@icloud.com"
@@ -73,10 +85,15 @@ git config --global branch.master.merge refs/heads/master
 git config --global push.default simple
 git config --global remote.origin.push HEAD
 git config --global core.excludesfile ~/.gitignore
+
 if ! grep -q "\.DS_Store" ~/.gitignore; then
     echo .DS_Store >> ~/.gitignore
 fi
 
+
+################################################################################
+##  Create working directory                                                  ##
+################################################################################
 if [ ! -d ~/github ]; then
     echo "Task: create  ~/github directory"
     mkdir ~/github
@@ -87,7 +104,10 @@ if [ ! -d ~/works ]; then
     mkdir ~/works
 fi
 
-## create id_rsa key
+
+################################################################################
+##  Create SSH key & upload to Github                                         ##
+################################################################################
 echo "Task: create ssh key"
 if [ ! -f ~/.ssh/id_rsa ]; then
     echo " >> create new ssh key and add to github.com"
@@ -99,13 +119,17 @@ fi
 
 
 
-## clone all my github repos
+################################################################################
+##  Clone git repository                                                      ##
+################################################################################
 echo "Task: clone all my github repositories"
 USER=ekcode; cd ~/github && curl -s "https://api.github.com/users/$USER/repos?per_page=1000" | grep -o 'git@[^"]*' | xargs -L1 git clone
 cd - > /dev/null
 
 
-## vim setup
+################################################################################
+##  VIM                                                                       ##
+################################################################################
 if [ ! -d ~/.vim_runtime ]; then
     echo "Task: setup vim"
     git clone https://github.com/ekcode/vimrc.git ~/.vim_runtime
@@ -113,31 +137,53 @@ if [ ! -d ~/.vim_runtime ]; then
 fi
 
 
-## install oh-my-zsh
+################################################################################
+##  ZSH                                                                       ##
+################################################################################
 echo "Task: install zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/oh-my-zsh/master/tools/install.sh)"
 
 
-## scm_breeze
+################################################################################
+##  ZSH plugins                                                               ##
+################################################################################
+if ! grep -q "plugins=\(git\)" ~/.zshrc; then
+    echo "Task: set zsh plugins"
+    sed -i '' -e 's/plugins=(git)/plugins=(git autojump dakao)/' ~/.zshrc
+fi
+
+
+################################################################################
+##  ZSH theme                                                                 ##
+################################################################################
+if grep -q "ZSH_THEME=\"robbyrussell\"" ~/.zshrc; then
+    echo "Task: set zsh theme"
+    sed -i '' -e 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/' ~/.zshrc
+fi
+
+
+################################################################################
+##  System environments                                                       ##
+################################################################################
+if ! grep -q "export LC_ALL=\"ko_KR.UTF-8\"" ~/.zshrc; then
+    echo "Task: export LC_ALL"
+    printf "export LC_ALL=\"ko_KR.UTF-8\"" >> ~/.zshrc
+fi
+
+
+################################################################################
+##  scm breeze                                                                ##
+################################################################################
 if [ ! -d ~/.scm_breeze ]; then
     echo "Task: install scm_breeze"
     git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
     ~/.scm_breeze/install.sh
 fi
 
-## zsh plugins
-if ! grep -q "plugins=\(git\)" ~/.zshrc; then
-    echo "Task: settings for zsh plugins"
-    sed -i '' -e 's/plugins=(git)/plugins=(git autojump dakao)/' ~/.zshrc
-fi
 
-## LC_ALL
-if ! grep -q "export LC_ALL=\"ko_KR.UTF-8\"" ~/.zshrc; then
-    echo "Task: export LC_ALL"
-    printf "export LC_ALL=\"ko_KR.UTF-8\"" >> ~/.zshrc
-fi
-
-## hosts
+################################################################################
+##  /etc/hosts                                                                ##
+################################################################################
 echo "Task: configure /etc/hosts"
 if ! grep -q "local.publisher.daumtools.com" /etc/hosts; then
     sudo sh -c 'printf "\n127.0.0.1    local.publisher.daumtools.com" >> /etc/hosts'
@@ -149,7 +195,9 @@ else
 fi
 
 
-## java lib/security
+################################################################################
+##  Java                                                                      ##
+################################################################################
 SECURITY_DIR="`/usr/libexec/java_home`/jre/lib/security"
 echo "Task: install jre/lib/security files"
 if [ ! -f $SECURITY_DIR/US_export_policy.jar.bak ]; then
@@ -161,3 +209,20 @@ if [ ! -f $SECURITY_DIR/US_export_policy.jar.bak ]; then
 else
     echo " >> already installed"
 fi
+
+
+################################################################################
+##  Powerline fonts                                                           ##
+################################################################################
+echo "Task: install powerline fonts"
+if [ -n "`\ls ~/Library/Fonts/*Powerline*`" ]; then
+    echo ' >> powerline fonts already installed'
+else
+    git clone https://github.com/powerline/fonts.git
+    cd fonts
+    ./install.sh
+    cd ..
+    rm -rf fonts
+fi
+echo ' >> iTerm2 > Preferences > Profiles > Color > Solarized Dark'
+echo ' >> iTerm2 > Preferences > Profiles > Text > 12pt Meslo LG M Regular for Powerline'
