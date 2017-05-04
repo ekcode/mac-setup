@@ -71,6 +71,7 @@ git config --global user.email "ekcode@icloud.com"
 git config --global branch.master.remote origin
 git config --global branch.master.merge refs/heads/master
 git config --global push.default simple
+git config --global remote.origin.push HEAD
 git config --global core.excludesfile ~/.gitignore
 if ! grep -q "\.DS_Store" ~/.gitignore; then
     echo .DS_Store >> ~/.gitignore
