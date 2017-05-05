@@ -34,6 +34,7 @@ brew cask install java \
     google-trends \
     vagrant \
     vagrant-manager \
+    virtualbox \
     docker \
     caffeine
 
