@@ -13,6 +13,7 @@ else
     echo " >> already installed"
     brew update
     brew upgrade
+    brew cleanup
 fi
 
 brew doctor
@@ -31,7 +32,15 @@ brew cask install java \
     dropbox \
     google-photos-backup \
     google-trends \
-    qlcolorcode \
+    vagrant \
+    vagrant-manager \
+    docker \
+    caffeine
+
+################################################################################
+##  Quick view plugins                                                        ##
+################################################################################
+brew cask install qlcolorcode \
     qlstephen \
     qlmarkdown \
     quicklook-json \
@@ -160,7 +169,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/oh-my-zsh/master/to
 ################################################################################
 if ! grep -q "plugins=\(git\)" ~/.zshrc; then
     echo "Task: set zsh plugins"
-    sed -i '' -e 's/plugins=(git)/plugins=(git autojump dakao)/' ~/.zshrc
+    sed -i '' -e 's/plugins=(git)/plugins=(git autojump colored-man zsh-syntax-highlighting dakao)/' ~/.zshrc
 fi
 
 
