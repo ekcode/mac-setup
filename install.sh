@@ -119,26 +119,21 @@ if [ ! -d ~/.vim_runtime ]; then
 fi
 
 
-
 ################################################################################
-##  scm breeze                                                                ##
+##  Execute sub tasks                                                         ##
 ################################################################################
-if [ ! -d ~/.scm_breeze ]; then
-    echo "Task: install scm_breeze"
-    git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
-    ~/.scm_breeze/install.sh
-fi
-
 if [ "$0" == "sh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/oh-my-zsh.sh)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/system-env.sh)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/java.sh)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/hosts.sh)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/git.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/scm-breeze.sh)"
 else
     sh tasks/oh-my-zsh.sh
     sh tasks/system-env.sh
     sh tasks/java.sh
     sh tasks/hosts.sh
     sh tasks/git.sh
+    sh tasks/scm-breeze.sh
 fi
