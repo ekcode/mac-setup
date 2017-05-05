@@ -30,8 +30,19 @@ brew cask install java \
     atom \
     dropbox \
     google-photos-backup \
-    google-trends
-
+    google-trends \
+    qlcolorcode \
+    qlstephen \
+    qlmarkdown \
+    quicklook-json \
+    qlprettypatch \
+    quicklook-csv \
+    betterzipql \
+    qlimagesize \
+    webpquicklook \
+    suspicious-package \
+    quicklookase \
+    qlvideo
 
 ################################################################################
 ##  Install packages using brew                                               ##
