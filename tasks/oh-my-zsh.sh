@@ -10,13 +10,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/oh-my-zsh/master/to
 ##  ZSH plugins                                                               ##
 ################################################################################
 brew install zsh-syntax-highlighting
-
-if ! grep -q "plugins=\(.*\)" ~/.zshrc; then
-    echo "Task: set zsh plugins"
-    sed -i '' -e 's/plugins=(.*)/plugins=(git autojump colored-man-pages zsh-syntax-highlighting dakao)/' ~/.zshrc
-    if ! grep -q "source \/usr\/local\/share\/zsh-syntax-highlighting\/zsh-syntax-highlighting.zsh" ~/.zshrc; then
-        printf "source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
-    fi
+echo "Task: set zsh plugins"
+sed -i '' -e 's/^plugins=(.*)/plugins=(git autojump colored-man-pages zsh-syntax-highlighting dakao)/' ~/.zshrc
+if ! grep -q "source \/usr\/local\/share\/zsh-syntax-highlighting\/zsh-syntax-highlighting.zsh" ~/.zshrc; then
+    printf "source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
 fi
 
 
@@ -26,7 +23,7 @@ fi
 if grep -q "ZSH_THEME=\"robbyrussell\"" ~/.zshrc; then
     echo "Task: set zsh theme"
     sed -i '' -e 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/' ~/.zshrc
-    printf "DEFAULT_USER=kakao" >> ~/.zshrc
+    echo "DEFAULT_USER=kakao" >> ~/.zshrc
 fi
 
 ################################################################################
