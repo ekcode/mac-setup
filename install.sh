@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo $0
-exit 1
-
 ################################################################################
 ##  Homebrew                                                                  ##
 ################################################################################
@@ -132,8 +129,16 @@ if [ ! -d ~/.scm_breeze ]; then
     ~/.scm_breeze/install.sh
 fi
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/oh-my-zsh.sh)"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/system-env.sh)"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/java.sh)"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/hosts.sh)"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/git.sh)"
+if [ "$0" == "sh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/oh-my-zsh.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/system-env.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/java.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/hosts.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/git.sh)"
+else
+    sh tasks/oh-my-zsh.sh
+    sh tasks/system-env.sh
+    sh tasks/java.sh
+    sh tasks/hosts.sh
+    sh tasks/git.sh
+fi
