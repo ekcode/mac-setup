@@ -23,6 +23,7 @@ brew doctor
 ################################################################################
 echo "Task: install apps by brew cask"
 brew cask install java \
+    tomcat \
     google-chrome \
     intellij-idea \
     sourcetree \
