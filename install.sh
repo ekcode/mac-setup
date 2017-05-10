@@ -138,4 +138,5 @@ else
     sh tasks/hosts.sh
     sh tasks/git.sh
     sh tasks/scm-breeze.sh
+    sh tasks/auth.sh
 fi
