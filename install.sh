@@ -23,7 +23,6 @@ brew doctor
 ################################################################################
 echo "Task: install apps by brew cask"
 brew cask install java \
-    tomcat \
     google-chrome \
     intellij-idea \
     sourcetree \
@@ -83,6 +82,7 @@ brew install git \
     mongodb \
     yarn \
     heroku \
+    tomcat \
     ack
 
 ################################################################################
