@@ -7,10 +7,11 @@ echo "Task: create ssh key"
 if [ ! -f ~/.ssh/id_rsa ]; then
     echo " >> create new ssh key and add to github.com"
     ssh-keygen -f id_rsa -t rsa -N '' -C 'ekcode@icloud.com' -f ~/.ssh/id_rsa
-    curl -u "ekcode" --data "{\"title\":\"\",\"key\":\"`cat ~/.ssh/id_rsa.pub`\"}" https://api.github.com/user/keys
 else
     echo " >> ssh key already exists"
 fi
+echo " >> regist public key to github"
+curl -u "ekcode" --data "{\"title\":\"\",\"key\":\"`cat ~/.ssh/id_rsa.pub`\"}" https://api.github.com/user/keys
 
 
 ################################################################################
