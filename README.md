@@ -4,6 +4,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/ins
 ```
 
 # Next
+## iTerm
+* Preferences > Profiles > Text > Font
+  * set to `Meslo LG for Powerline` (size: 12)
+
 ## SourceTree
 * Preferences > General
   * set `Full Name` and `Email Address`, otherwise, it overwrites global git configuration with an empty string.
