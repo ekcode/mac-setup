@@ -5,8 +5,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/ins
 
 # Next
 ## iTerm
-* Preferences > Profiles > Text > Font
-  * set to `Meslo LG for Powerline` (size: 12)
+* preferences > profiles > text > font
+  * set to `meslo lg for powerline` (size: 12)
+
+* preferences > profiles > colors > color presets...
+  * set to `Solarized Dark`
 
 ## SourceTree
 * Preferences > General
