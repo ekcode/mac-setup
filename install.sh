@@ -91,7 +91,8 @@ brew install git \
 if [ ! -d /Applications/SQLDeveloper.app ]; then
     echo "Task: install SQL Developer"
     curl -O http://10.30.144.141/sqldeveloper-4.2.0.17.089.1709-macosx.app.zip
-    unzip -n sqldeveloper-4.2.0.17.089.1709-macosx.app.zip -d /Applications
+    unzip -q -n sqldeveloper-4.2.0.17.089.1709-macosx.app.zip -d /Applications
+    rm sqldeveloper-4.2.0.17.089.1709-macosx.app.zip
 fi
 
 
