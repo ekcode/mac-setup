@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-##  Daum Auth                                                                 ##
+##  Configurations for Work                                                   ##
 ################################################################################
 AUTH_DIR="/usr/local/daum/"
 AUTH_FILE="ADKEY.dat"
@@ -16,3 +16,10 @@ else
     echo " >> already installed"
 fi
 
+echo "Task: create /daum/* directory"
+if [ ! -d /daum ]; then
+    sudo mkdir /daum
+    sudo chown kakao:staff /daum
+    mkdir -p sudo /daum/logs/kraken-client/
+    echo " >> created"
+fi

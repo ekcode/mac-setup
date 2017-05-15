@@ -142,6 +142,7 @@ if [ "$0" == "sh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/hosts.sh)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/git.sh)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/scm-breeze.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/tasks/work-conf.sh)"
 else
     sh tasks/oh-my-zsh.sh
     sh tasks/system-env.sh
@@ -149,5 +150,5 @@ else
     sh tasks/hosts.sh
     sh tasks/git.sh
     sh tasks/scm-breeze.sh
-    sh tasks/auth.sh
+    sh tasks/work-conf.sh
 fi
