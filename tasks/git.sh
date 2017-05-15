@@ -25,6 +25,7 @@ git config --global branch.master.merge refs/heads/master
 git config --global push.default simple
 git config --global remote.origin.push HEAD
 git config --global core.excludesfile ~/.gitignore
+git config --global core.editor /usr/bin/vim
 
 if ! grep -q "\.DS_Store" ~/.gitignore; then
     echo .DS_Store >> ~/.gitignore
