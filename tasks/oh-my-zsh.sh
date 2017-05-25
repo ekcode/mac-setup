@@ -30,13 +30,13 @@ fi
 ##  Powerline fonts                                                           ##
 ################################################################################
 echo "Task: install powerline fonts"
-if [ -n "`\ls ~/Library/Fonts/*Powerline*`" ]; then
+if [ -n "$(ls ~/Library/Fonts/*Powerline*)" ]; then
     echo ' >> powerline fonts already installed'
 else
     git clone https://github.com/powerline/fonts.git
-    cd fonts
+    cd fonts || exit
     ./install.sh
-    cd ..
+    cd .. || exit
     rm -rf fonts
 fi
 echo ' >> iTerm2 > Preferences > Profiles > Color > Solarized Dark'

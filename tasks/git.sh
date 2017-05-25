@@ -11,7 +11,7 @@ else
     echo " >> ssh key already exists"
 fi
 echo " >> regist public key to github"
-curl -u "ekcode" --data "{\"title\":\"\",\"key\":\"`cat ~/.ssh/id_rsa.pub`\"}" https://api.github.com/user/keys
+curl -u "ekcode" --data "{\"title\":\"\",\"key\":\"$(cat ~/.ssh/id_rsa.pub)\"}" https://api.github.com/user/keys
 
 
 ################################################################################
@@ -37,4 +37,4 @@ fi
 ################################################################################
 echo "Task: clone all my github repositories"
 USER=ekcode; cd ~/github && curl -s "https://api.github.com/users/$USER/repos?per_page=1000" | grep -o 'git@[^"]*' | xargs -L1 git clone
-cd - > /dev/null
+cd - || exit > /dev/null

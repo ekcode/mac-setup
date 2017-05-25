@@ -3,6 +3,13 @@
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ekcode/mac-setup/kakao/install.sh)"
 ```
 
+# Before clean my mac
+* ssh directory
+* db connections config
+* work directory
+* brew (cask) list
+
+
 # Next
 ## iTerm
 * preferences > profiles > text > font
@@ -28,4 +35,3 @@ _Version can be changed._
 ```
 /Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
 ```
-
