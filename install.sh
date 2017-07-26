@@ -36,7 +36,8 @@ brew cask install java \
     vagrant-manager \
     virtualbox \
     docker \
-    caffeine
+    caffeine \
+    karabiner-elements
 
 ################################################################################
 ##  Quick view plugins                                                        ##
