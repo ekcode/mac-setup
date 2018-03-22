@@ -37,7 +37,9 @@ brew cask install java \
     virtualbox \
     docker \
     caffeine \
-    karabiner-elements
+    karabiner-elements \
+    bitwarden \
+    telegram
 
 ################################################################################
 ##  Quick view plugins                                                        ##
