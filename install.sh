@@ -93,7 +93,7 @@ brew install git \
 ################################################################################
 if [ ! -d /Applications/SQLDeveloper.app ]; then
     echo "Task: install SQL Developer"
-    curl -O http://10.30.144.141/sqldeveloper-4.2.0.17.089.1709-macosx.app.zip
+    curl -O http://10.61.244.98/sqldeveloper-4.2.0.17.089.1709-macosx.app.zip
     unzip -q -n sqldeveloper-4.2.0.17.089.1709-macosx.app.zip -d /Applications
     rm sqldeveloper-4.2.0.17.089.1709-macosx.app.zip
 fi
@@ -122,6 +122,12 @@ fi
 if [ ! -d ~/works ]; then
     echo "Task: create  ~/works directory"
     mkdir ~/works
+fi
+
+if [ ! -d ~/works/ClixPublisher ]; then
+    echo "Task: checkout ClixPublisher project"
+    git clone git@github.daumkakao.com:DAPNDev/ClixPublisher.git ~/works/ClixPublisher
+    cp tasks/files/post-checkout ~/works/ClixPublisher/.git/hooks/
 fi
 
 
