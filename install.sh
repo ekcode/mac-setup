@@ -1,12 +1,16 @@
 #!/bin/bash
 
 ################################################################################
+##  xcode-select                                                              ##
+################################################################################
+echo " >> run xcode-select"
+xcode-select --install
+
+################################################################################
 ##  Homebrew                                                                  ##
 ################################################################################
 echo "Task: homebrew"
 if ! command -v brew > /dev/null; then
-    echo " >> run xcode-select"
-    xcode-select --install
     echo " >> install homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
