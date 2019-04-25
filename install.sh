@@ -35,7 +35,6 @@ brew cask install java \
     atom \
     dropbox \
     google-photos-backup \
-    google-trends \
     vagrant \
     vagrant-manager \
     virtualbox \
@@ -97,9 +96,9 @@ brew install git \
 ################################################################################
 if [ ! -d /Applications/SQLDeveloper.app ]; then
     echo "Task: install SQL Developer"
-    curl -O http://10.61.244.98/sqldeveloper-4.2.0.17.089.1709-macosx.app.zip
-    unzip -q -n sqldeveloper-4.2.0.17.089.1709-macosx.app.zip -d /Applications
-    rm sqldeveloper-4.2.0.17.089.1709-macosx.app.zip
+    curl -O http://10.61.244.98/sqldeveloper-19.1.0.094.2042-macosx.app.zip
+    unzip -q -n sqldeveloper-19.1.0.094.2042-macosx.app.zip -d /Applications
+    rm sqldeveloper-19.1.0.094.2042-macosx.app.zip
 fi
 
 
