@@ -34,7 +34,7 @@ brew cask install java \
     enpass \
     atom \
     dropbox \
-    google-photos-backup \
+    google-backup-and-sync \
     vagrant \
     vagrant-manager \
     virtualbox \
@@ -53,7 +53,6 @@ brew cask install qlcolorcode \
     quicklook-json \
     qlprettypatch \
     quicklook-csv \
-    betterzipql \
     qlimagesize \
     webpquicklook \
     suspicious-package \
