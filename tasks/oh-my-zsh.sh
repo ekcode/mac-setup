@@ -41,3 +41,10 @@ else
 fi
 echo ' >> iTerm2 > Preferences > Profiles > Color > Solarized Dark'
 echo ' >> iTerm2 > Preferences > Profiles > Text > 12pt Meslo LG M Regular for Powerline'
+
+
+
+################################################################################
+##  Kubectl completion                                                        ##
+################################################################################
+echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~/.zshrc
