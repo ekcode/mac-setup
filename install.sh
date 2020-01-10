@@ -25,18 +25,19 @@ echo "Task: install apps by brew cask"
 brew cask install java \
     google-chrome \
     intellij-idea \
-    sourcetree \
+    datagrip \
     iterm2 \
-    enpass \
-    atom \
     dropbox \
     google-backup-and-sync \
     vagrant \
     vagrant-manager \
     virtualbox \
     docker \
-    caffeine
-
+    cocoarestclient \
+    firefox \
+    visual-studio-code \
+    dozer \
+    fork
 ################################################################################
 ##  Quick view plugins                                                        ##
 ################################################################################
